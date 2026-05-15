@@ -478,6 +478,73 @@ a { color: inherit; text-decoration: none; }
 .auth-switch a:hover { text-decoration: underline; }
 
 /* ------------------------------------------------------------------ */
+/* Page Section (Terms, Privacy, etc.)                                */
+/* ------------------------------------------------------------------ */
+
+.page-section {
+    min-height: calc(100vh - 60px - 200px);
+    padding: 3rem 2rem;
+}
+
+.page-container {
+    max-width: var(--content-width, 700px);
+    margin: 0 auto;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.page-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    color: var(--ink-faint);
+    font-size: 0.9rem;
+}
+
+.legal-content {
+    background: var(--paper);
+    border: 1px solid var(--ink-light);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.legal-content h2 {
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin: 1.5rem 0 0.75rem;
+    font-weight: 600;
+}
+
+.legal-content h2:first-child {
+    margin-top: 0;
+}
+
+.legal-content p {
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.legal-content ul {
+    margin: 0.5rem 0 1rem 1.5rem;
+}
+
+.legal-content li {
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+/* ------------------------------------------------------------------ */
 /* Footer                                                              */
 /* ------------------------------------------------------------------ */
 
