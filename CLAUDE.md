@@ -2,10 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
-
-Expense tracker web application built with Flask. Currently a scaffold with landing pages and placeholder routes — database and core functionality are yet to be implemented.
-
 ## Commands
 
 ```bash
@@ -14,35 +10,60 @@ python app.py
 
 # Run tests (pytest)
 pytest
+
+# Run a specific test file or test case
+pytest tests/test_<filename>.py::<test_function_name>
 ```
 
 The app runs on `http://localhost:5001` with `debug=True` enabled.
 
+
 ## Architecture
 
-- **Framework**: Flask with Jinja2 templates
-- **Database**: SQLite — `database/db.py` contains stub functions (`get_db`, `init_db`, `seed_db`) to be implemented
-- **Static**: JavaScript in `static/js/main.js`
-- **Templates**: `templates/` — base layout in `base.html`, pages extend it
+### Overview
+This is a Flask-based expense tracker web application with the following high-level structure:
 
-### Routes
+- **Backend**: Flask (Python) with SQLite for data persistence.
+- **Frontend**: Jinja2 templates for server-side rendering, with static assets (JavaScript/CSS) for interactivity.
+- **Database**: SQLite, initialized and seeded on startup via `database/db.py`.
 
-| Route | Purpose |
-|-------|---------|
-| `/` | Landing page with dashboard preview |
-| `/register` | User registration |
-| `/login` | User login |
-| `/terms` | Terms of service |
-| `/privacy` | Privacy policy |
-| `/logout`, `/profile`, `/expenses/add`, `/expenses/<id>/edit`, `/expenses/<id>/delete` | Placeholders — not yet implemented |
 
-## Key Files
+### Key Components
 
-- `app.py` — Flask app setup and all routes
-- `database/db.py` — Database connection and initialization (student implementation)
-- `templates/landing.html` — Main landing page with embedded video modal
-- `static/js/main.js` — Client-side JavaScript
+#### 1. **Flask Application (`app.py`)**
+- Sets up the Flask app and initializes the database on startup.
+- Defines routes for:
+  - Landing page (`/`), registration (`/register`), login (`/login`), and static pages (`/terms`, `/privacy`).
+  - Placeholder routes for core functionality (e.g., `/logout`, `/profile`, `/expenses/add`). These are stubs awaiting implementation.
 
-## Notes
+#### 2. **Database Layer (`database/db.py`)**
+- Provides functions for:
+  - `get_db()`: Returns a SQLite connection with `row_factory` and foreign keys enabled.
+  - `init_db()`: Creates tables for `users` and `expenses` if they don’t exist.
+  - `seed_db()`: Inserts sample data for development (e.g., a demo user and expenses).
+- Uses `bcrypt` for password hashing.
 
-The project appears to be educational (see comments in `database/db.py` referencing "students"). The database layer and several core features are placeholder code awaiting implementation.
+#### 3. **Templates (`templates/`)**
+- Base template (`base.html`) defines the shared layout (e.g., navigation, footer).
+- Page-specific templates (e.g., `landing.html`, `register.html`) extend `base.html`.
+- Includes a modal for embedded videos (e.g., "See how it works" on the landing page).
+
+#### 4. **Static Assets (`static/`)**
+- `static/js/main.js`: Client-side JavaScript for interactivity (e.g., modal handling).
+
+
+### Database Schema
+
+#### Tables
+- **`users`**: Stores user accounts with fields for `id`, `username`, `email`, `password_hash`, and `created_at`.
+- **`expenses`**: Stores expense records with fields for `id`, `user_id` (foreign key), `amount`, `category`, `description`, `date`, and `created_at`.
+
+#### Relationships
+- `expenses.user_id` references `users.id` with `ON DELETE CASCADE`.
+
+
+### Development Notes
+
+- The project is designed for educational purposes (e.g., placeholder routes are labeled with "students will implement these").
+- Sample data is seeded only if the database is empty.
+- Passwords are hashed using `bcrypt` before storage.
